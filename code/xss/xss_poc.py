@@ -26,11 +26,11 @@ def set_ips():
 
 def setup():
 	# Retriving all the available tags
-	with open('tags.txt') as t:
+	with open('./code/res/tags.txt') as t:
 		for tag in t:
 			tags.append(tag.strip())
 	# Retriving all the available events
-	with open('events.txt') as e:
+	with open('./code/res/events.txt') as e:
 		for event in e:
 			events.append(event.strip())
 
