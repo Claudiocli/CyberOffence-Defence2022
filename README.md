@@ -3,7 +3,7 @@
 - Server oriented CTF - [File path traversal, validation of file extension with null byte bypass][2]
 - Expert CTF - [SSRF with whitelist-based input filter][3]
 
-# Team members
+# Team 3 - members
 - ANTONIO ROCCO SPATARO [MAT. 231862]
 - DAVIDE GENA [MAT. 231873]
 - CLAUDIO LUCISANO [MAT. 231871]
