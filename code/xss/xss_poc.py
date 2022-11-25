@@ -10,6 +10,7 @@ from rich.align import Align
 from rich.table import Table
 from rich.style import Style
 from time import sleep
+from typing import Optional
 import typer
 
 CONSOLE = Console()
@@ -53,9 +54,9 @@ TAGS, EVENTS = [], []
 TAGS_EVENTS_PERMITTED = []
 
 
-def set_ips(lab_id: str = '', exploit_id: str = ''):
+def set_ips(lab_id: Optional[str] = None, exploit_id: Optional[str] = None):
     global SERVER, EXPLOIT
-    if lab_id != '':
+    if lab_id is not None and exploit_id is not None:
         SERVER = lab_id
         EXPLOIT = exploit_id
     else:
@@ -211,7 +212,7 @@ def send_to_exploit():
         return ERROR_STATUS_CODE
 
 
-def main(lab_id: str, exploit_id: str):
+def main(lab_id: Optional[str] = typer.Argument(None), exploit_id: Optional[str] = typer.Argument(None)):
     try:
         setup()
         set_ips(lab_id, exploit_id)
