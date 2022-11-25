@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from requests import get, post, ConnectionError, ConnectTimeout
+from requests import get, post, ConnectTimeout
 from rich.console import Console
 from rich.layout import Layout
 from rich.panel import Panel
@@ -10,7 +10,6 @@ from rich.align import Align
 from rich.table import Table
 from rich.style import Style
 from time import sleep
-import sys
 import typer
 
 CONSOLE = Console()
@@ -54,11 +53,11 @@ TAGS, EVENTS = [], []
 TAGS_EVENTS_PERMITTED = []
 
 
-def set_ips():
+def set_ips(lab_id: str = '', exploit_id: str = ''):
     global SERVER, EXPLOIT
-    if len(sys.argv) > 1:
-        SERVER = sys.argv[1]
-        EXPLOIT = sys.argv[2]
+    if lab_id != '':
+        SERVER = lab_id
+        EXPLOIT = exploit_id
     else:
         CONSOLE.clear()
         SERVER = CONSOLE.input('Insert the lab\'s id\n').strip()
@@ -143,6 +142,7 @@ def analyze_tags_events():
         CONSOLE.clear()
         CONSOLE.print(
             f'Connection timeout, retrying - attempt n°{REPEAT_COUNT+1}', style=DANGER_STYLE)
+        sleep(3)
         for step in track(range(3)):
             sleep(1)
             step
@@ -199,6 +199,7 @@ def send_to_exploit():
         CONSOLE.clear()
         CONSOLE.print(
             f'Connection timeout, retrying - attempt n°{REPEAT_COUNT+1}', style=DANGER_STYLE)
+        sleep(3)
         for step in track(range(3)):
             sleep(1)
             step
@@ -210,22 +211,24 @@ def send_to_exploit():
         return ERROR_STATUS_CODE
 
 
-def main():
+def main(lab_id: str, exploit_id: str):
     try:
         setup()
-        set_ips()
+        set_ips(lab_id, exploit_id)
         global REPEAT_COUNT
         REPEAT_COUNT = 0
-        while REPEAT_COUNT <= MAX_REP or code != SUCCESS_STATUS_CODE:
+        code = 0
+        while code != SUCCESS_STATUS_CODE or REPEAT_COUNT <= MAX_REP:
             code = analyze_tags_events()
             if code == ERROR_STATUS_CODE:
                 exit(-1)
             REPEAT_COUNT += 1
         print_results()
-        if not ask_to_complete_challenge():
-            exit(0)
+        # if not ask_to_complete_challenge():
+        #     exit(0)
         REPEAT_COUNT = 0
-        while REPEAT_COUNT <= MAX_REP or code != SUCCESS_STATUS_CODE:
+        code = 0
+        while code != SUCCESS_STATUS_CODE or REPEAT_COUNT <= MAX_REP:
             code = send_to_exploit()
             if code == ERROR_STATUS_CODE:
                 exit(-1)
