@@ -11,7 +11,21 @@ from rich.table import Table
 from rich.style import Style
 from time import sleep
 from typing import Optional
-import typer, os
+import typer
+import os
+
+class InvalidURLException(Exception):
+    """Exception raised when the response of the request is very likely to indicate an invalid url
+
+    Attributes:
+        message -- explanation of the error
+    """
+    def __init__(self, message='Given url is invalid') -> None:
+        self.message = message
+        super().__init__(self.message)
+    
+    def __str__(self) -> str:
+        return super().__str__()
 
 CONSOLE = Console()
 LAYOUT = Layout()
@@ -63,7 +77,7 @@ def set_ips(lab_id: Optional[str] = None, exploit_id: Optional[str] = None):
         CONSOLE.clear()
         EXPLOIT = CONSOLE.input(
             'Insert the id of the exploit server (Only the id!)\n').strip()
-
+    # Can ids be validated?
     CONSOLE.clear()
     CONSOLE.print(LAYOUT)
 
@@ -110,6 +124,8 @@ def analyze_tags_events():
                     f'Now testing\n[red]{t}[/red]', align='center', vertical='middle')))
                 payload = f'<{t}>'
                 res = get(SERVER, {'search': payload}, timeout=10)
+                if res.status_code == 504 or res.status_code == 403:
+                    raise InvalidURLException()
                 if res.status_code == 200:
                     tags_permitted.append(t)
                     LAYOUT['top_panel'].split(Panel(title='Status', renderable=Align(
@@ -150,7 +166,7 @@ def analyze_tags_events():
     except Exception:
         CONSOLE.clear()
         CONSOLE.print(
-            'There was an error with the requests to the server site.\nBe sure to have inserted correctly only the lab id and the exploit server id!\nCheck your internet connection and, please, try again.', style=DANGER_STYLE)
+            'There was an error with the requests to the server site.\nBe sure to have inserted correctly only the lab id and the exploit server id!\nCheck also your internet connection and, please, try again.', style=DANGER_STYLE)
         return ERROR_STATUS_CODE
 
 
