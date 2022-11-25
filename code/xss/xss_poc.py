@@ -11,7 +11,7 @@ from rich.table import Table
 from rich.style import Style
 from time import sleep
 from typing import Optional
-import typer
+import typer, os
 
 CONSOLE = Console()
 LAYOUT = Layout()
@@ -37,8 +37,6 @@ TABLE_EVENTS.add_column('Events', justify='center',
 # text_search = Text('Now testing\ntag: [red]body[/red]\nevent: [red]onload[/red]')
 LAYOUT.split_column(Layout(name='top_panel', renderable=Panel(title='Status', renderable=Align(
     'Now testing\ntag: [red]body[/red]\nevent: [red]onload[/red]', align='center', vertical='middle'))), Layout(name='bottom_panel', renderable=Panel(title='Tags and Event permitted', renderable=TABLES_LAYOUT)))
-
-CONSOLE.print(LAYOUT)
 
 # Template lab
 TEMPLATE_SERVER = 'https://ID_LAB.web-security-academy.net'
@@ -74,12 +72,13 @@ def set_ips(lab_id: Optional[str] = None, exploit_id: Optional[str] = None):
 
 
 def setup():
+    os.chdir(__file__.removesuffix(os.path.basename(__file__)))
     LAYOUT['top_panel'].split(Panel(title='Status', renderable=Align(
         '[cyan]Retriving [green]tags\'[/green] set[/cyan]', align='center', vertical='middle')))
     CONSOLE.clear()
     CONSOLE.print(LAYOUT)
     # Retriving all the available tags
-    with open('./code/res/tags.txt') as t:
+    with open('../res/tags.txt') as t:
         for tag in t:
             TAGS.append(tag.strip())
     LAYOUT['top_panel'].split(Panel(title='Status', renderable=Align(
@@ -92,7 +91,7 @@ def setup():
     CONSOLE.clear()
     CONSOLE.print(LAYOUT)
     # Retriving all the available events
-    with open('./code/res/events.txt') as e:
+    with open('../res/events.txt') as e:
         for event in e:
             EVENTS.append(event.strip())
     LAYOUT['top_panel'].split(Panel(title='Status', renderable=Align(
