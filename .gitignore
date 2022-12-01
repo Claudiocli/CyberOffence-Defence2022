@@ -1,3 +1,5 @@
+# Old versions (keeping in local for debug and superstition)
+old/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
