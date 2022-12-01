@@ -3,6 +3,7 @@ import typer
 
 from path_thraversal import AutomizedPathTraversal
 from xss import xss_poc
+from ssrf import ssrf
 
 app = typer.Typer()
 
@@ -22,11 +23,13 @@ def xss_resolver(ctf_session_code: Optional[str] = typer.Argument(None), exploit
     xss_poc.main(ctf_session_code, exploit_server_session_code)
 
 @app.command()
-def ssrf_resolver(ctf_session_code: str):
+def ssrf_resolver(url: str):
     """
     A script to solve the CTF "SSRF with whitelist-based input filter".
     """
-    pass
+    ssrf.main(url)
+
+
 
 
 if __name__ == "__main__":
