@@ -234,7 +234,7 @@ def main(lab_id: Optional[str] = typer.Argument(None), exploit_id: Optional[str]
         global REPEAT_COUNT
         REPEAT_COUNT = 0
         code = 0
-        while code != SUCCESS_STATUS_CODE or REPEAT_COUNT <= MAX_REP:
+        while (code != SUCCESS_STATUS_CODE) is not False and (REPEAT_COUNT <= MAX_REP):
             code = analyze_tags_events()
             if code == ERROR_STATUS_CODE:
                 exit(-1)
@@ -244,7 +244,7 @@ def main(lab_id: Optional[str] = typer.Argument(None), exploit_id: Optional[str]
         #     exit(0)
         REPEAT_COUNT = 0
         code = 0
-        while code != SUCCESS_STATUS_CODE or REPEAT_COUNT <= MAX_REP:
+        while (code != SUCCESS_STATUS_CODE) is not False and (REPEAT_COUNT <= MAX_REP):
             code = send_to_exploit()
             if code == ERROR_STATUS_CODE:
                 exit(-1)
