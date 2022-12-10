@@ -24,6 +24,13 @@ form {
     visibility: hidden;
   }
 
+  .yourcredentials {
+    border-radius: 12px;
+    border: 2px solid rgb(255, 174, 76);
+    padding: 8px;
+    text-align: center;
+  }
+
   .logo {
     display: block;
     margin-left: auto;

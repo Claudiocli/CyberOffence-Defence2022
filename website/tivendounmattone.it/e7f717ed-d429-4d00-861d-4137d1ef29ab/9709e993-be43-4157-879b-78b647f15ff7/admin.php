@@ -38,7 +38,7 @@
   <div>
     <nav>
       <a href="/dashboard.php">Dashboard</a>
-      <a href="/e7f717ed-d429-4d00-861d-4137d1ef29ab/9709e993-be43-4157-879b-78b647f15ff7/log">Logs</a>
+      <a href="/e7f717ed-d429-4d00-861d-4137d1ef29ab/9709e993-be43-4157-879b-78b647f15ff7/log_page.php">Logs</a>
     </nav>
   </div>
   <div style="padding-top:1rem;position: absolute;left: 2%;">
