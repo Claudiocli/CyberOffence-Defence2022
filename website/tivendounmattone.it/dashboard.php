@@ -59,7 +59,7 @@
                             if (md5($_COOKIE['account_type']) == md5($account_type)) {
                                 echo '<div>';
                                 include 'image.php';
-                                echo '<h3 id="image.php?file=www/web/images/goldenwall4admin.jpg ;)">A special golden wall just for admin ;) </h3><img src="resources/happyrating.png">$ FREE4U<a class="button" href="">View details</a></div>';
+                                echo '<h3 id="image.php?file=www/web/images/goldenwall4admin.jpg - try to catch the flag.txt ;)">A special golden wall just for admin ;) </h3><img src="resources/happyrating.png">$ FREE4U<a class="button" href="">View details</a></div>';
                             }
                         }
                     }

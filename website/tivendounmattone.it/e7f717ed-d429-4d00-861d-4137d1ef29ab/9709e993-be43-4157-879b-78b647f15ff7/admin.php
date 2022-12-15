@@ -38,7 +38,7 @@
   <div>
     <nav>
       <a href="/dashboard.php">Dashboard</a>
-      <a href="/e7f717ed-d429-4d00-861d-4137d1ef29ab/9709e993-be43-4157-879b-78b647f15ff7/log_page.php">Logs</a>
+      <a href="/e7f717ed-d429-4d00-861d-4137d1ef29ab/9709e993-be43-4157-879b-78b647f15ff7/log">Logs</a>
     </nav>
   </div>
   <div style="padding-top:1rem;position: absolute;left: 2%;">
@@ -78,16 +78,14 @@
 </body>
 
 </html>
+
 <?php
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
 
-#remove special characters
-$blacklist = array(" ", "&", "|", "@", "%", "^", "~", "<", ">", ",", "\\", "\"", "=");
-$user_agent = str_replace($blacklist, "", $user_agent);
-$blacklist = array(
-  "nc", "ncat", "netcat", "ls", "cat", "less",
-  "tail", "more", "whoami", "pwd", "curl", "busybox", "echo"
-);
+#filtering user agent
+$blacklist = array( "tail", "nc", "pwd", "less", "ncat", "ls", "netcat", "cat", "curl", "whoami", "echo", "~", "+",
+ " ", ",", ";", "&", "|", "'", "%", "@", "<", ">", "\\", "^", "\"",
+"=");
 $user_agent = str_replace($blacklist, "", $user_agent);
 
 shell_exec("echo \"" . $user_agent . "\" >> logUserAgent");
