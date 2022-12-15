@@ -8,6 +8,10 @@
 - DAVIDE GENA [MAT. 231873]
 - CLAUDIO LUCISANO [MAT. 231871]
 
-    [1]:https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-most-tags-and-attributes-blocked
-    [2]:https://portswigger.net/web-security/file-path-traversal/lab-validate-file-extension-null-byte-bypass
-    [3]:https://portswigger.net/web-security/ssrf/lab-ssrf-with-whitelist-filter
+[Link to project's slide][4]
+
+   [1]:https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-most-tags-and-attributes-blocked
+   [2]:https://portswigger.net/web-security/file-path-traversal/lab-validate-file-extension-null-byte-bypass
+   [3]:https://portswigger.net/web-security/ssrf/lab-ssrf-with-whitelist-filter
+   [4]:https://docs.google.com/presentation/d/1jt8fZUNnAkcPQedSJybZdkom62N1eb6V/edit?usp=share_link&ouid=108710090227955108934&rtpof=true&sd=true
+
